@@ -21,16 +21,25 @@ export default function FilmeApp() {
 
   // pega o access token quando logado
   useEffect(() => {
-    const fetchToken = async () => {
-      try {
-        const accessToken = await getAccessTokenSilently();
-        setToken(accessToken);
-      } catch (e) {
-        console.error("Erro ao buscar token:", e);
-      }
-    };
-    if (isAuthenticated) fetchToken();
-  }, [isAuthenticated, getAccessTokenSilently]);
+  const fetchToken = async () => {
+    try {
+      const accessToken = await getAccessTokenSilently({
+        authorizationParams: {
+          audience: "https://pf-filmes-api", 
+          scope: "openid profile email"
+        },
+      });
+      setToken(accessToken);
+    } catch (e) {
+      console.error("Erro ao buscar token:", e);
+    }
+  };
+
+  if (isAuthenticated) {
+    fetchToken();
+  }
+}, [isAuthenticated, getAccessTokenSilently]);
+
 
   if (!isAuthenticated) {
     return <LoginButton />;
