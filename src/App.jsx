@@ -2,18 +2,15 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import PessoasApp from './Pessoa'
+import FilmeApp from './Filme'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <PessoasApp></PessoasApp>
-      </div>
-    </>
+    <div>
+      <FilmeApp />
+    </div>
   )
 }
 
 export default App
+
